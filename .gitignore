@@ -1,0 +1,8 @@
+# Never upload: raw working files and private drafts
+Portfolio Content/
+master.html
+wip.html
+public/
+_to_delete/
+desktop.ini
+Thumbs.db
