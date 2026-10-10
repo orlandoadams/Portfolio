@@ -563,6 +563,97 @@ html{-webkit-tap-highlight-color:transparent}
   .lb{padding-inline:0}
 }
 
+/* ===== v3: project chapters, drawings, photo series (Oct 2026) ===== */
+.unit-intro{display:grid;gap:clamp(20px,3vw,32px)}
+.unit-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.unit-steps li + li{border-left:1px solid var(--line)}
+.unit-steps a{display:grid;gap:6px;padding:18px 18px 18px 0;text-decoration:none}
+.unit-steps li + li a{padding-left:18px}
+.unit-steps .mono{color:var(--amber);font-size:13px}
+.unit-steps b{font-weight:500;font-size:clamp(20px,2vw,28px);letter-spacing:-.03em;line-height:1.05;transition:color .4s}
+.unit-steps a:hover b{color:var(--amber)}
+.unit-steps .muted{font-size:14px}
+.unit-tutors{margin:0;font-size:12px}
+.chap{display:grid;gap:clamp(18px,2.4vw,32px);margin-top:clamp(56px,8vw,112px);scroll-margin-top:90px}
+.chap-h{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1.3fr);gap:clamp(12px,3vw,48px);align-items:baseline;border-top:1px solid var(--line);padding-top:18px}
+.chap-h .num{font-family:var(--mono);color:var(--amber);font-size:13px;margin:0}
+.chap-h h3{margin:0;font-weight:500;letter-spacing:-.035em;text-transform:none;font-size:clamp(26px,3vw,42px)}
+.chap-p{margin:0;max-width:60ch;color:var(--text)}
+.pnav{display:flex;flex-wrap:wrap;gap:8px 22px;padding-bottom:4px}
+.pnav a{text-decoration:none;color:var(--mute);font-size:13px;transition:color .3s}
+.pnav a:hover{color:var(--amber)}
+.cap-line{margin:-12px 0 0;font-size:12px}
+.ticks{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.ticks li{padding:12px 0 12px 22px;border-bottom:1px solid var(--line);position:relative;max-width:48ch}
+.ticks li::before{content:"";position:absolute;left:2px;top:1.15em;width:8px;height:1px;background:var(--amber)}
+.note h3{text-transform:none;font-weight:500;letter-spacing:-.03em}
+
+/* drawing sheets: the big technical sections */
+.sheet{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(20px,3.6vw,56px);align-items:start}
+.sheet-main{margin:0;position:relative;background:#000;cursor:zoom-in}
+.sheet-main img{width:100%}
+.sheet-main figcaption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0 0;background:var(--ink);font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--mute)}
+.sheet-main figcaption b{color:var(--text);font-weight:500}
+.zoom-hint{position:absolute;right:12px;bottom:48px;z-index:2;background:rgba(15,17,19,.82);color:var(--text);border:1px solid rgba(232,228,220,.25);padding:8px 12px;font-size:12px;pointer-events:none;transition:background .4s,color .4s}
+.zoom-hint::before{content:"+";color:var(--amber);margin-right:8px}
+.sheet-main:hover .zoom-hint{background:var(--amber);color:var(--ink)}
+.sheet-main:hover .zoom-hint::before{color:var(--ink)}
+.sheet-notes{position:sticky;top:96px}
+.tdec{list-style:none;counter-reset:t;margin:0;padding:0;border-top:1px solid var(--line)}
+.tdec li{counter-increment:t;display:grid;grid-template-columns:34px minmax(0,1fr);padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.55;color:var(--mute)}
+.tdec li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--amber);padding-top:3px;grid-row:span 9}
+.tdec b{color:var(--text);font-weight:500}
+.details .plate img{max-height:min(70vh,760px);object-fit:contain;margin-inline:auto}
+.plate.dwg,.sheet-main{transition:box-shadow .5s}
+.plate.dwg:hover{box-shadow:0 0 0 1px var(--amber)}
+
+/* floor plan switcher */
+.levels .plate img{max-height:80vh;width:auto;margin-inline:auto;object-fit:contain}
+.ch-card b{font-family:var(--body)}
+.levels{display:grid;gap:12px}
+.lv-tabs{display:flex;gap:0;border:1px solid var(--line);width:max-content;max-width:100%;overflow-x:auto}
+.lv-tabs button{background:transparent;border:0;border-right:1px solid var(--line);color:var(--mute);font:inherit;font-size:13px;padding:10px 16px;cursor:pointer;transition:background .3s,color .3s}
+.lv-tabs button:last-child{border-right:0}
+.lv-tabs button[aria-selected="true"]{background:var(--amber);color:var(--ink)}
+.lv-tabs button:not([aria-selected="true"]):hover{color:var(--text)}
+.levels figure:not([hidden]){animation:lvIn .7s var(--ease)}
+@keyframes lvIn{from{opacity:0}}
+
+/* photography: groups and show more */
+.ch-group{margin:clamp(36px,5vw,56px) 0 0;color:var(--mute);border-top:1px solid var(--line);padding-top:12px}
+.ch-group + .chapters-index{margin-top:16px}
+.photos figure.more{display:none}
+.chapter.all .photos figure.more{display:block}
+.more-btn{margin-top:8px}
+.chapter.all .more-btn{display:none}
+.photos-2{columns:2 280px}
+
+/* lightbox: zoom and pan for drawings */
+.lb{overflow:hidden;touch-action:none}
+.lb-stage{flex:1 1 auto;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.lb-stage img{max-height:100%;max-width:100%;object-fit:contain;transform-origin:0 0;will-change:transform;cursor:zoom-in}
+.lb.zoomed .lb-stage img{cursor:grab}
+.lb.zoomed.drag .lb-stage img{cursor:grabbing}
+.lb-tools{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);left:16px;display:flex;gap:8px;align-items:center}
+.lb-tools .btn{position:static;padding:8px 12px;min-width:40px}
+.lb button#lbClose{position:absolute}
+.lb-tip{font-family:var(--mono);font-size:12px;color:var(--mute);margin-left:6px}
+.lb.zoomed #lbCap{opacity:.35}
+@media (max-width:860px){
+  .unit-steps{grid-template-columns:minmax(0,1fr)}
+  .unit-steps li + li{border-left:0;border-top:1px solid var(--line)}
+  .unit-steps li + li a{padding-left:0}
+  .chap-h{grid-template-columns:minmax(0,1fr)}
+  .chap-h .num{margin-bottom:-6px}
+  .sheet{grid-template-columns:minmax(0,1fr)}
+  .sheet-notes{position:static}
+}
+@media (max-width:560px){
+  .lb-tip{display:none}
+  .details .plate img{max-height:none}
+}
+@media (prefers-reduced-motion:reduce){.levels figure:not([hidden]){animation:none}}
+
 /* private preview badge: only shows away from the public github.io site */
 .wip-tag{position:fixed;left:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:60;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink);background:var(--amber);padding:6px 10px;pointer-events:none;text-shadow:none}
 </style>
@@ -598,7 +689,7 @@ html{-webkit-tap-highlight-color:transparent}
 <main>
 <div class="view" id="v-home" data-view="home">
   <section class="hx" aria-label="Introduction">
-    <div class="hx-media"><img src="img/so-aerial.jpg" alt="Misty aerial of Set One Studios among estate housing, a train passing below" data-par="0.18"></div>
+    <div class="hx-media"><img width="1800" height="1350" src="img/so-aerial.jpg" alt="Misty aerial of Set One Studios among estate housing, a train passing below" data-par="0.18"></div>
     <div class="hx-fog" aria-hidden="true"><i></i><i></i><i></i></div>
     <canvas class="hx-rain" aria-hidden="true"></canvas>
     <div class="wrap hx-inner">
@@ -618,7 +709,7 @@ html{-webkit-tap-highlight-color:transparent}
       <p class="eyebrow">About</p>
       <p class="statement" data-split>I'm a final-year architecture student at Oxford Brookes. I design buildings around the people who use them, how they are made and how they feel to move through. Alongside architecture I work toward film and TV set design, where the same skills tell a story through <em>space, light and atmosphere.</em></p>
       <div class="i2-row">
-        <figure class="portrait"><img src="img/me.jpg" alt="Black and white portrait of Orlando Adams"><figcaption class="mono">Oxford / Suffolk</figcaption></figure>
+        <figure class="portrait"><img width="900" height="1350" src="img/me.jpg" alt="Black and white portrait of Orlando Adams"><figcaption class="mono">Oxford / Suffolk</figcaption></figure>
         <div class="i2-copy">
           <p class="i2-p" data-reveal>I'm looking for opportunities in architectural practice and in film and TV art departments. My strongest project, Set One Studios, brings both together: a fabrication hub in East London where sets, props and costumes are built for the studios next door.</p>
           <dl class="glance" data-reveal>
@@ -636,11 +727,11 @@ html{-webkit-tap-highlight-color:transparent}
       <a class="btn" href="#architecture">All architecture</a>
     </div>
     <div class="best">
-      <a class="tile t-a" href="#set-one"><img src="img/so-hero.jpg" alt="Set One Studios seen through tall grasses"><span class="t-cap"><b>Set One Studios</b><span>Year 2 / Film production hub</span></span></a>
-      <a class="tile t-b" href="#set-one"><img src="img/so-aerial.jpg" alt="Misty aerial of Set One Studios on the estate" loading="lazy"><span class="t-cap"><b>Set One, aerial</b><span>D5 Render</span></span></a>
-      <a class="tile t-d" href="#common-ground"><img src="img/cg-street.jpg" alt="Common Ground Studios from the street" loading="lazy"><span class="t-cap"><b>Common Ground</b><span>Year 2</span></span></a>
-      <a class="tile t-e" href="#light"><img src="img/dc-bulb.jpg" alt="Glowing filament bulb render" loading="lazy"><span class="t-cap"><b>Light studies</b><span>Year 2</span></span></a>
-      <a class="tile t-f" href="#photography"><img src="img/ph-DSC00046.jpg" alt="Black and white photo of fishermen hauling nets" loading="lazy"><span class="t-cap"><b>Photography</b><span>Kochi, India</span></span></a>
+      <a class="tile t-a" href="#set-one"><img width="1800" height="1272" src="img/so-hero.jpg" alt="Set One Studios seen through tall grasses"><span class="t-cap"><b>Set One Studios</b><span>Year 2 / Film production hub</span></span></a>
+      <a class="tile t-b" href="#so-construction"><img width="2200" height="2491" src="img/dr-so-section-top.jpg" alt="Perspective section through Set One Studios" loading="lazy"><span class="t-cap"><b>Set One, 1:20 section</b><span>Technical drawing</span></span></a>
+      <a class="tile t-d" href="#common-ground"><img width="1800" height="1272" src="img/cg-street.jpg" alt="Common Ground Studios from the street" loading="lazy"><span class="t-cap"><b>Common Ground</b><span>Year 2</span></span></a>
+      <a class="tile t-e" href="#light"><img width="1800" height="1800" src="img/dc-bulb.jpg" alt="Glowing filament bulb render" loading="lazy"><span class="t-cap"><b>Light studies</b><span>Year 2</span></span></a>
+      <a class="tile t-f" href="#photography"><img width="1600" height="1067" src="img/ph-DSC00046.jpg" alt="Black and white photo of fishermen hauling nets" loading="lazy"><span class="t-cap"><b>Photography</b><span>11 places, 2 series</span></span></a>
     </div>
 
     <section class="contact-block" id="contact">
@@ -671,77 +762,236 @@ html{-webkit-tap-highlight-color:transparent}
     <div class="years">
 
       <details class="year" id="year2" open>
-        <summary><span class="y-title"><b>Year 2</b><span>Unit L: Repair, Exchange, Production</span></span><span class="y-toggle" aria-hidden="true">+</span></summary>
+        <summary><span class="y-title"><b>Year 2</b><span>Unit L: Making Housing Public</span></span><span class="y-toggle" aria-hidden="true">+</span></summary>
         <div class="y-body">
-          <p class="lede">Three projects on one estate in Bow, each a step up in scale: a bolt-on repair workshop, then a making and exchange centre, then a full production studio for film.</p>
+          <div class="unit-intro">
+            <p class="lede">One estate, three projects, each bigger than the last. The Malmesbury Estate in Bow is a postwar estate in decline: amenities have closed, the blocks are falling into disrepair and the community has little say. Each project gives residents a way to make, repair and earn for themselves.</p>
+            <ol class="unit-steps">
+              <li><a href="#offset"><span class="mono">01 / Repair</span><b>Offset Studios</b><span class="muted">A rooftop workshop, up to 16 m²</span></a></li>
+              <li><a href="#common-ground"><span class="mono">02 / Exchange</span><b>Common Ground Studios</b><span class="muted">Workshop and assembly hall</span></a></li>
+              <li><a href="#set-one"><span class="mono">03 / Production</span><b>Set One Studios</b><span class="muted">Film fabrication hub and estate upgrade</span></a></li>
+            </ol>
+            <p class="mono muted unit-tutors">Oxford Brookes, Unit L, 2025 to 26. Tutors: Mark Rist, Natalie Savva, Toby Dauncey</p>
+          </div>
+
           <article class="project" id="offset">
-            <div class="shead"><div><p class="eyebrow">Unit L, Part 1: Repair</p><h2>Offset Studios</h2></div><p class="lede">A small repair workshop that bolts onto an existing block.</p></div>
-            <p class="soon mono">Images being added</p>
+            <div class="shead"><div><p class="eyebrow">Unit L, Part 1: Repair</p><h2>Offset Studios</h2></div><p class="lede">A small repair and craft workshop bolted onto the roof of an existing block. Residents come to fix things, learn skills from each other and make. The idea started at the V&amp;A East Storehouse, just up the road from Bow, where collections sit in tall containers that visitors can look into. Offset borrows that: a display wall where residents' work is stored in full view, turning the estate's own craft into its own collection.</p></div>
+            <p class="soon mono">Drawings and model photos being added</p>
           </article>
+
           <article class="project" id="common-ground">
-            <div class="shead"><div><p class="eyebrow">Unit L, Part 2: Exchange</p><h2>Common Ground Studios</h2></div><p class="lede">A furniture making and repair centre with an assembly hall. Residents build, fix and sell at auction, bringing people into Bow and funding the next round of work.</p></div>
-            <figure class="frame " data-cap="Street view"><img src="img/cg-street.jpg" alt="Brick and timber workshop with arched openings" loading="lazy"><figcaption><span><b>Street view</b></span><span>D5 Render</span></figcaption></figure>
-            <div class="grid g2">
-              <figure class="frame tall" data-cap="Aerial"><img src="img/cg-axo.jpg" alt="Aerial of the workshop with glass-brick chimney" loading="lazy"><figcaption><span><b>Aerial</b></span><span>D5 Render</span></figcaption></figure>
-              <figure class="frame tall" data-cap="Roof plan"><img src="img/cg-roof.jpg" alt="Top-down view of the site with railway" loading="lazy"><figcaption><span><b>Roof plan</b></span><span>Rendered</span></figcaption></figure>
+            <div class="shead"><div><p class="eyebrow">Unit L, Part 2: Exchange</p><h2>Common Ground Studios</h2></div>
+              <div>
+                <p class="lede">Common Ground scales Offset's idea up into a permanent building. Residents make and repair furniture in the workshop, then bring it into the assembly hall, a room that works as both auction house and town hall.</p>
+                <p class="lede muted">Auctions put Bow's craft on the map and bring money in. On other nights the same room is where the community meets to fix its own problems. A glass-brick chimney wraps the spiral stair and glows at night, a nod to the industrial stacks that once marked Bow's skyline.</p>
+              </div>
+            </div>
+            <figure class="frame" data-cap="Common Ground Studios / Street view"><img width="1800" height="1272" src="img/cg-street.jpg" alt="Brick and timber workshop with arched openings" loading="lazy"><figcaption><span><b>Street view</b></span><span>D5 Render</span></figcaption></figure>
+            <dl class="facts">
+              <div><dt>Programme</dt><dd>Furniture making, repair &amp; auction</dd></div>
+              <div><dt>Structure</dt><dd>Reclaimed steel, timber &amp; brick</dd></div>
+              <div><dt>Wall U-value</dt><dd>0.151 W/m²K</dd></div>
+              <div><dt>Landmark</dt><dd>Glass-brick chimney stair</dd></div>
+            </dl>
+
+            <div class="chap" id="cg-plans">
+              <div class="chap-h"><p class="num">01</p><h3>Plans</h3><p class="chap-p">The ground floor holds the workshop and the assembly hall. Upstairs, rooms cantilever out over the workshop, reached by the spiral stair inside the glass-brick chimney.</p></div>
+              <div class="levels" data-levels>
+                <div class="lv-tabs mono" role="tablist" aria-label="Floor"><button type="button" role="tab" aria-selected="true">Ground</button><button type="button" role="tab" aria-selected="false">First</button><button type="button" role="tab" aria-selected="false">Roof</button></div>
+                <figure class="plate dwg" data-cap="Common Ground Studios / Ground floor plan 1:50" data-zoom="img/dr-cg-gf-z.jpg"><img width="2400" height="1695" src="img/dr-cg-gf.jpg" alt="Ground floor plan at 1:50" loading="lazy"><div class="plate-cap"><span><b>Ground floor plan</b></span><span>1:50 @ A1</span></div></figure>
+                <figure class="plate dwg" data-cap="Common Ground Studios / First floor plan 1:50" data-zoom="img/dr-cg-ff-z.jpg" hidden><img width="2400" height="1695" src="img/dr-cg-ff.jpg" alt="First floor plan at 1:50" loading="lazy"><div class="plate-cap"><span><b>First floor plan</b></span><span>1:50 @ A1</span></div></figure>
+                <figure class="plate dark dwg" data-cap="Common Ground Studios / Roof plan 1:150" data-zoom="img/dr-cg-roofplan-z.jpg" hidden><img width="2400" height="1695" src="img/dr-cg-roofplan.jpg" alt="Rendered roof plan with the railway along the top" loading="lazy"><div class="plate-cap"><span><b>Roof plan</b></span><span>1:150 @ A1</span></div></figure>
+              </div>
+            </div>
+
+            <div class="chap" id="cg-construction">
+              <div class="chap-h"><p class="num">02</p><h3>How it is built</h3><p class="chap-p">An A0 sectional perspective at 1:20, cut through the workshop, the cantilevered first floor and the chimney stair. Open it full screen and zoom in to read every layer.</p></div>
+              <div class="sheet">
+                <figure class="sheet-main dwg" data-cap="Common Ground Studios / Detail sectional perspective, A0 @ 1:20" data-zoom="img/dr-cg-section-z.jpg"><img width="2200" height="1681" src="img/dr-cg-section-top.jpg" alt="Sectional perspective through the workshop, first floor and glass-brick chimney" loading="lazy"><span class="zoom-hint mono">Open full sheet</span><figcaption><span><b>Detail sectional perspective</b></span><span>A0 @ 1:20</span></figcaption></figure>
+                <div class="sheet-notes">
+                  <p class="eyebrow">Technical decisions</p>
+                  <ol class="tdec">
+                    <li><b>Reclaimed steel cantilever.</b> Reclaimed 254x146 UB beams carry the first floor out over the workshop, cutting embodied carbon and nodding to warehouse construction. Intumescent paint takes them to R60.</li>
+                    <li><b>The chimney stair.</b> A central steel cylinder carries the stair and the aluminium chimney above. Glass brick replaces solid brick so filtered light gets in and the stair reads from the street.</li>
+                    <li><b>Breathable walls.</b> STEICO wood fibre insulation, lime plaster and a ventilated brick rainscreen keep the wall vapour-open, with no risk of condensation inside it.</li>
+                    <li><b>Sun and air.</b> East glazing warms the ground floor slab before the workshop opens. High roof openings pull cool air in through the workshop door: passive stack ventilation.</li>
+                    <li><b>Water.</b> A box gutter hidden in the corrugated steel roof feeds underground storage for toilet flushing, tool cleaning and dust suppression.</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="grid g2 details">
+                <figure class="plate dark dwg" data-cap="Common Ground Studios / 1:5 cantilever floor build-up" data-zoom="img/dr-cg-d-floor-z.jpg"><img width="1400" height="744" src="img/dr-cg-d-floor.jpg" alt="1:5 cantilever floor build-up with U-value table" loading="lazy"><div class="plate-cap"><span><b>Cantilever floor</b></span><span>1:5 / U 0.169</span></div></figure>
+                <figure class="plate dark dwg" data-cap="Common Ground Studios / 1:5 external brick wall build-up" data-zoom="img/dr-cg-d-brick-z.jpg"><img width="1400" height="855" src="img/dr-cg-d-brick.jpg" alt="1:5 external brick wall build-up with U-value table" loading="lazy"><div class="plate-cap"><span><b>External brick wall</b></span><span>1:5 / U 0.151</span></div></figure>
+              </div>
+              <div class="grid g2 details">
+                <figure class="plate dark dwg" data-cap="Common Ground Studios / 1:5 ground bearing concrete floor" data-zoom="img/dr-cg-wall-z.jpg"><img width="1695" height="2400" src="img/dr-cg-wall.jpg" alt="1:5 detail of the wall meeting the ground bearing concrete floor and footing" loading="lazy"><div class="plate-cap"><span><b>Wall to ground floor</b></span><span>1:5 @ A1</span></div></figure>
+                <figure class="plate dark dwg" data-cap="Common Ground Studios / 1:10 roof build-up" data-zoom="img/dr-cg-d-roof-z.jpg"><img width="647" height="1400" src="img/dr-cg-d-roof.jpg" alt="1:10 roof build-up with U-value table" loading="lazy"><div class="plate-cap"><span><b>Roof build-up</b></span><span>1:10 / U 0.149</span></div></figure>
+              </div>
+            </div>
+
+            <div class="chap" id="cg-spaces">
+              <div class="chap-h"><p class="num">03</p><h3>In use</h3><p class="chap-p">The workshop, the rooms upstairs and the yard court beside the railway.</p></div>
+              <div class="grid g2">
+                <figure class="frame tall" data-cap="Common Ground Studios / Workshop"><img width="1800" height="1272" src="img/cg-workshop.jpg" alt="Workshop with timber benches under a tall timber roof" loading="lazy"><figcaption><span><b>Workshop</b></span><span>Interior</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Common Ground Studios / Garden side"><img width="1800" height="1272" src="img/cg-garden.jpg" alt="Two-storey workshop with arched brick openings across a lawn" loading="lazy"><figcaption><span><b>Garden side</b></span><span>Day</span></figcaption></figure>
+              </div>
+              <div class="grid g3">
+                <figure class="frame tall" data-cap="Common Ground Studios / The yard"><img width="1800" height="1272" src="img/cg-court.jpg" alt="People gathered on the yard court beside the workshop" loading="lazy"><figcaption><span><b>The yard</b></span><span>Eye level</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Common Ground Studios / Upper corridor"><img width="1800" height="1272" src="img/cg-corridor.jpg" alt="Timber-lined first floor corridor" loading="lazy"><figcaption><span><b>Upper corridor</b></span><span>Interior</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Common Ground Studios / Meeting room"><img width="1800" height="1272" src="img/cg-meeting.jpg" alt="Small meeting room with residents around a table" loading="lazy"><figcaption><span><b>Meeting room</b></span><span>Interior</span></figcaption></figure>
+              </div>
+              <div class="grid g2">
+                <figure class="frame tall" data-cap="Common Ground Studios / Aerial"><img width="1800" height="1272" src="img/cg-axo.jpg" alt="Aerial of the workshop with glass-brick chimney" loading="lazy"><figcaption><span><b>Aerial</b></span><span>D5 Render</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Common Ground Studios / Yard from above"><img width="1800" height="1272" src="img/cg-yard.jpg" alt="Aerial of the yard court next to the railway" loading="lazy"><figcaption><span><b>Yard from above</b></span><span>D5 Render</span></figcaption></figure>
+              </div>
+              <figure class="frame" data-cap="Common Ground Studios / Dusk"><img width="1800" height="1272" src="img/cg-dusk.jpg" alt="The workshop at dusk with a van on the road" loading="lazy"><figcaption><span><b>Dusk</b></span><span>Context</span></figcaption></figure>
             </div>
           </article>
-          
-      <article class="project" id="set-one">
-        <div class="shead">
-          <div><p class="eyebrow">Unit L, Part 3: Production</p><h2>Set One Studios</h2></div>
-          <div>
-            <p class="lede">A fabrication hub for film and TV on the Malmesbury Estate in Bow, a short walk from Three Mills Studios. Sets, props and costumes are built here and fed into London's production network.</p>
-            <p class="lede muted">A three-storey hempcrete and timber workshop inside a polycarbonate shell. A skybridge links it to the existing block, which gains a workers' café, quieter offices, winter gardens and new community rooms.</p>
-          </div>
-        </div>
-        <figure class="frame" data-cap="Set One Studios. Aerial"><img src="img/so-aerial.jpg" alt="Misty aerial of the glowing studio among estate housing, a train passing below" loading="lazy"><figcaption><span><b>Establishing shot</b> / estate, railway, City skyline</span><span>D5 Render</span></figcaption></figure>
-        <dl class="facts">
-          <div><dt>Programme</dt><dd>Set, prop &amp; costume fabrication</dd></div>
-          <div><dt>Structure</dt><dd>Hempcrete &amp; timber in polycarbonate</dd></div>
-          <div><dt>Wall U-value</dt><dd>0.26 W/m²K</dd></div>
-          <div><dt>Site</dt><dd>Malmesbury Estate, Bow</dd></div>
-        </dl>
-        <div class="grid g2">
-          <figure class="frame tall" data-cap="Entrance"><img src="img/so-facade.jpg" alt="Front of the polycarbonate studio under a bright sky" loading="lazy"><figcaption><span><b>Entrance</b></span><span>Day</span></figcaption></figure>
-          <figure class="frame tall" data-cap="The Yard"><img src="img/so-night.jpg" alt="Lit ground-floor workshop opening onto a planted yard at dusk" loading="lazy"><figcaption><span><b>The Yard</b></span><span>Dusk</span></figcaption></figure>
-        </div>
-        <div class="split rev">
-          <div class="note">
-            <p class="eyebrow">Built like a set</p>
-            <h3>The Set Design Court</h3>
-            <p>The rooftop courts take the pitched and sawtooth rooflines of the surrounding streets and flatten them into 2D panels on perforated steel posts.</p>
-            <p>They come down as easily as they go up, and groups can reconfigure them without tools. The same logic as a flat on a sound stage.</p>
-          </div>
-          <figure class="frame tall" data-cap="Roof court"><img src="img/so-court.jpg" alt="Rooftop court with a purple house-shaped panel" loading="lazy"><figcaption><span><b>Roof court</b></span><span>Panels in use</span></figcaption></figure>
-        </div>
-        <div class="grid g3">
-          <figure class="frame tall" data-cap="Squash court"><img src="img/so-squash.jpg" alt="Squash players on a perforated blue floor" loading="lazy"><figcaption><span><b>Squash court</b></span><span>Community use</span></figcaption></figure>
-          <figure class="frame tall" data-cap="Practice room"><img src="img/so-guitar.jpg" alt="Man playing guitar in a room lined with polycarbonate" loading="lazy"><figcaption><span><b>Practice room</b></span><span>Community use</span></figcaption></figure>
-          <figure class="frame tall" data-cap="Mezzanine"><img src="img/so-mezz.jpg" alt="Timber-framed mezzanine office" loading="lazy"><figcaption><span><b>Mezzanine</b></span><span>Exposed timber</span></figcaption></figure>
-        </div>
-        <div class="grid g2">
-          <figure class="frame tall" data-cap="Old and new"><img src="img/so-gap.jpg" alt="Narrow sunlit gap between polycarbonate and brick" loading="lazy"><figcaption><span><b>Old and new</b></span><span>Interior</span></figcaption></figure>
-          <figure class="frame tall" data-cap="The skybridge side"><img src="img/so-alley.jpg" alt="Path between the studio and existing block" loading="lazy"><figcaption><span><b>The skybridge side</b></span><span>Exterior</span></figcaption></figure>
-        </div>
-        <div class="grid g2">
-          <figure class="frame tall" data-cap="Axonometric"><img src="img/so-axo4.jpg" alt="Night axonometric of the studio and estate" loading="lazy"><figcaption><span><b>Axonometric</b></span><span>Night</span></figcaption></figure>
-          <figure class="frame tall" data-cap="Axonometric"><img src="img/so-axo3.jpg" alt="Second night axonometric from another angle" loading="lazy"><figcaption><span><b>Axonometric</b></span><span>Night</span></figcaption></figure>
-        </div>
-        <figure class="frame " data-cap="West elevation"><img src="img/so-elevation.jpg" alt="West elevation render against a grey sky" loading="lazy"><figcaption><span><b>West elevation</b></span><span>Rendered</span></figcaption></figure>
-        <div class="grid g3">
-          <figure class="frame tall" data-cap="The estate"><img src="img/so-estate.jpg" alt="Estate housing seen from beside the studio" loading="lazy"><figcaption><span><b>The estate</b></span><span>Context</span></figcaption></figure>
-          <figure class="frame tall" data-cap="Housing upgrade"><img src="img/so-housing.jpg" alt="Existing housing block reclad with winter gardens" loading="lazy"><figcaption><span><b>Housing upgrade</b></span><span>Retrofit</span></figcaption></figure>
-          <figure class="frame tall" data-cap="Street approach"><img src="img/so-street.jpg" alt="Street approach to Set One Studios" loading="lazy"><figcaption><span><b>Street approach</b></span><span>Context</span></figcaption></figure>
-        </div>
-      </article>
+
+          <article class="project" id="set-one">
+            <div class="shead">
+              <div><p class="eyebrow">Unit L, Part 3: Production</p><h2>Set One Studios</h2></div>
+              <div>
+                <p class="lede">A fabrication hub for film and TV on the Malmesbury Estate in Bow, a short walk from Three Mills Studios. Sets, props and costumes are built here, and part of every pound earned goes back into upgrading the estate around it.</p>
+                <p class="lede muted">A three-storey hempcrete and timber workshop inside a polycarbonate shell. A skybridge links it to the existing block, which gains a workers' café, a CAD studio, winter gardens and new community rooms.</p>
+              </div>
+            </div>
+            <figure class="frame" data-cap="Set One Studios / Establishing shot"><img width="1800" height="1350" src="img/so-aerial.jpg" alt="Misty aerial of the glowing studio among estate housing, a train passing below" loading="lazy"><figcaption><span><b>Establishing shot</b> / estate, railway, City skyline</span><span>D5 Render</span></figcaption></figure>
+            <dl class="facts">
+              <div><dt>Programme</dt><dd>Set, prop &amp; costume fabrication</dd></div>
+              <div><dt>Structure</dt><dd>Hempcrete &amp; timber in polycarbonate</dd></div>
+              <div><dt>Wall U-value</dt><dd>0.26 W/m²K</dd></div>
+              <div><dt>Site</dt><dd>Malmesbury Estate, Bow</dd></div>
+            </dl>
+            <nav class="pnav mono" aria-label="Set One chapters"><a href="#so-site">01 Site</a><a href="#so-sets">02 Studying sets</a><a href="#so-plans">03 Plans</a><a href="#so-construction">04 Construction</a><a href="#so-inside">05 Inside</a><a href="#so-estate">06 The estate</a></nav>
+
+            <div class="chap" id="so-site">
+              <div class="chap-h"><p class="num">01</p><h3>Site and story</h3><p class="chap-p">Set One started with Bow's industrial past. Researching the old works and the chimney stacks that still mark the skyline led to Three Mills Studios, a working film studio just down the River Lea. With London's film industry growing, Set One gives it something Bow can build.</p></div>
+              <figure class="plate dark dwg" data-cap="Set One Studios / Site walk through a film lens" data-zoom="img/dr-so-filmwalk-z.jpg"><img width="2400" height="1697" src="img/dr-so-filmwalk.jpg" alt="Site photographs laid out as strips of film negative" loading="lazy"><div class="plate-cap"><span><b>Site walk through a film lens</b></span><span>Photography</span></div></figure>
+              <div class="split">
+                <figure class="plate dwg" data-cap="Set One Studios / Site axonometric, hand drawn"><img width="1411" height="2000" src="img/dr-so-sketch.jpg" alt="Hand-drawn axonometric of the estate between Roman Road and the railway, with sun path" loading="lazy"><div class="plate-cap"><span><b>Site axonometric</b></span><span>Hand drawn</span></div></figure>
+                <div class="stack">
+                  <figure class="plate dark" data-cap="Set One Studios / Making Housing Public"><img width="1272" height="1800" src="img/so-protest.jpg" alt="Collage of protest placards in front of a housing block under a storm" loading="lazy"><div class="plate-cap"><span><b>Making Housing Public</b></span><span>Collage</span></div></figure>
+                  <figure class="plate" data-cap="Set One Studios / The estate in line"><img width="1800" height="1272" src="img/so-siteaxo.jpg" alt="Black and white line axonometric of the estate" loading="lazy"><div class="plate-cap"><span><b>The estate in line</b></span><span>Axonometric</span></div></figure>
+                </div>
+              </div>
+              <div class="models">
+                <figure class="wide" data-cap="Set One Studios / Site model"><img width="1800" height="1251" src="img/so-model-4.jpg" alt="White site model with the new studio in polycarbonate and coloured blocks" loading="lazy"></figure>
+                <figure data-cap="Set One Studios / Site model, plan view"><img width="1230" height="1800" src="img/so-model-3.jpg" alt="Site model seen from above" loading="lazy"></figure>
+                <figure data-cap="Set One Studios / Site model, plan view"><img width="1438" height="1800" src="img/so-model-2.jpg" alt="Site model seen from above with red and yellow blocks" loading="lazy"></figure>
+                <figure class="wide" data-cap="Set One Studios / Site model"><img width="1800" height="1200" src="img/so-model-5.jpg" alt="Low view across the white site model" loading="lazy"></figure>
+                <figure class="wide" data-cap="Set One Studios / Site model, detail"><img width="959" height="1800" src="img/so-model-1.jpg" alt="Close-up of the studio massing in the site model" loading="lazy"></figure>
+              </div>
+              <p class="mono muted cap-line">Physical site model</p>
+            </div>
+
+            <div class="chap" id="so-sets">
+              <div class="chap-h"><p class="num">02</p><h3>Studying sets</h3><p class="chap-p">I drew over film stills to understand how a set works: a constructed world that looks real from one side and shows its workings from the other. The notes pick out the artificial world behind the real one, and the diagram places Set One where home, play and work overlap.</p></div>
+              <figure class="plate dark" data-cap="Set One Studios / Annotated film still: domestic life inside a production environment"><img width="1800" height="875" src="img/so-study-0.jpg" alt="Film still of a loft set annotated by hand, beside a diagram of home, play and work overlapping" loading="lazy"><div class="plate-cap"><span><b>Domestic life inside a production environment</b></span><span>Hand annotation</span></div></figure>
+              <figure class="plate dark" data-cap="Set One Studios / Annotated film still: construction drawing guiding the next layer of the city"><img width="1800" height="863" src="img/so-study-1.jpg" alt="Film still of a set under construction annotated by hand, beside a sketch of a core with arrows for growth" loading="lazy"><div class="plate-cap"><span><b>Unfinished surfaces, ongoing construction</b></span><span>Hand annotation</span></div></figure>
+              <div class="grid g3">
+                <figure class="plate dark" data-cap="Set One Studios / Exploded diagram"><img width="1273" height="1800" src="img/so-exploded.jpg" alt="Exploded line diagram of the building in white on black" loading="lazy"><div class="plate-cap"><span><b>Exploded diagram</b></span><span>Line</span></div></figure>
+                <figure class="plate" data-cap="Set One Studios / Yard furniture"><img width="1800" height="1271" src="img/so-furniture.jpg" alt="Line drawings of a bench, a picnic table and freestanding frames" loading="lazy"><div class="plate-cap"><span><b>Yard furniture</b></span><span>Line</span></div></figure>
+                <figure class="plate dark" data-cap="Set One Studios / Identity"><img width="1800" height="1800" src="img/so-logo.jpg" alt="Set One Studios mark: a figure building a set inside a hexagon" loading="lazy"><div class="plate-cap"><span><b>Set One mark</b></span><span>Identity</span></div></figure>
+              </div>
+            </div>
+
+            <div class="chap" id="so-plans">
+              <div class="chap-h"><p class="num">03</p><h3>Plans</h3><p class="chap-p">The new building holds a materials depot, a textiles depot, the main workshop, a smaller tool workshop, a textiles workshop and a rooftop inside the shell. The bridge carries a CAD studio and the workers' café into the upgraded block.</p></div>
+              <div class="levels" data-levels>
+                <div class="lv-tabs mono" role="tablist" aria-label="Floor"><button type="button" role="tab" aria-selected="true">Ground</button><button type="button" role="tab" aria-selected="false">First</button><button type="button" role="tab" aria-selected="false">Second</button><button type="button" role="tab" aria-selected="false">Third</button></div>
+                <figure class="plate dwg" data-cap="Set One Studios / Ground floor plan 1:100" data-zoom="img/dr-so-gf-z.jpg"><img width="2400" height="1695" src="img/dr-so-gf.jpg" alt="Ground floor plan at 1:100 showing the studio, the existing block and the yard" loading="lazy"><div class="plate-cap"><span><b>Ground floor plan</b></span><span>1:100 @ A1</span></div></figure>
+                <figure class="plate dwg" data-cap="Set One Studios / First floor plan 1:100" data-zoom="img/dr-so-ff-z.jpg" hidden><img width="2400" height="1695" src="img/dr-so-ff.jpg" alt="First floor plan at 1:100 with the bridge to the existing block" loading="lazy"><div class="plate-cap"><span><b>First floor plan</b></span><span>1:100 @ A1</span></div></figure>
+                <figure class="plate dwg" data-cap="Set One Studios / Second floor plan 1:100" data-zoom="img/dr-so-2f-z.jpg" hidden><img width="2400" height="1695" src="img/dr-so-2f.jpg" alt="Second floor plan at 1:100" loading="lazy"><div class="plate-cap"><span><b>Second floor plan</b></span><span>1:100 @ A1</span></div></figure>
+                <figure class="plate dwg" data-cap="Set One Studios / Third floor plan 1:100" data-zoom="img/dr-so-3f-z.jpg" hidden><img width="2400" height="1695" src="img/dr-so-3f.jpg" alt="Third floor plan at 1:100 with the roof courts" loading="lazy"><div class="plate-cap"><span><b>Third floor plan</b></span><span>1:100 @ A1</span></div></figure>
+              </div>
+            </div>
+
+            <div class="chap" id="so-construction">
+              <div class="chap-h"><p class="num">04</p><h3>Built like a set</h3><p class="chap-p">Set One turns a Lacaton &amp; Vassal idea inside out. Rather than wrapping a winter garden around a building, a solid hempcrete and timber workshop sits inside a steel frame clad in polycarbonate. The gap between the two is the circulation, so moving through the building feels like walking backstage.</p></div>
+              <div class="sheet">
+                <figure class="sheet-main dwg" data-cap="Set One Studios / Technical perspective section, A0 @ 1:20" data-zoom="img/dr-so-section-z.jpg"><img width="2200" height="2491" src="img/dr-so-section-top.jpg" alt="Perspective section through the polycarbonate shell and the three-storey timber and hempcrete workshop" loading="lazy"><span class="zoom-hint mono">Open full sheet</span><figcaption><span><b>Technical perspective section</b></span><span>A0 @ 1:20</span></figcaption></figure>
+                <div class="sheet-notes">
+                  <p class="eyebrow">Technical decisions</p>
+                  <ol class="tdec">
+                    <li><b>A warm buffer.</b> The 32 mm polycarbonate shell traps solar heat in a 1,861 mm cavity. With the 300 mm hempcrete wall behind it, it works like a Trombe wall, storing heat and releasing it slowly.</li>
+                    <li><b>Air on demand.</b> Operable polycarbonate panels and high and low windows drive stack ventilation through the full height of the workshop.</li>
+                    <li><b>Fire.</b> Exposed timber beams and columns are treated with intumescent paint for 60 minutes. Hempcrete infill is non-combustible and needs no extra protection.</li>
+                    <li><b>The shell frame.</b> 40x25 mm RHS beams at 1,775 mm centres hold the polycarbonate, sized for Southeast London wind loads.</li>
+                    <li><b>Overexpression.</b> An oversized western red cedar lintel sits proud of the wall on purpose, a sign of the woodworking going on inside.</li>
+                    <li><b>Water.</b> A concealed gutter feeds a greywater system for the site's bathrooms and WCs.</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="grid g3 details">
+                <figure class="plate dark dwg" data-cap="Set One Studios / Steel to concrete upstand connection 1:5" data-zoom="img/dr-so-d-upstand-z.jpg"><img width="1600" height="1277" src="img/dr-so-d-upstand.jpg" alt="1:5 detail of the steel frame meeting the concrete upstand, with installation sequence" loading="lazy"><div class="plate-cap"><span><b>Steel to concrete upstand</b></span><span>1:5</span></div></figure>
+                <figure class="plate dark dwg" data-cap="Set One Studios / Ground floor wall detail 1:10 and U-value" data-zoom="img/dr-so-d-wall-z.jpg"><img width="1400" height="1521" src="img/dr-so-d-wall.jpg" alt="1:10 ground floor wall detail with U-value calculation, 0.260 W/m2K" loading="lazy"><div class="plate-cap"><span><b>Ground floor wall</b></span><span>1:10 / U 0.260</span></div></figure>
+                <figure class="plate dark dwg" data-cap="Set One Studios / Concealed gutter 1:1" data-zoom="img/dr-so-d-gutter-z.jpg"><img width="1400" height="1491" src="img/dr-so-d-gutter.jpg" alt="1:1 detail of the concealed aluminium gutter" loading="lazy"><div class="plate-cap"><span><b>Concealed gutter</b></span><span>1:1</span></div></figure>
+              </div>
+              <div class="split rev">
+                <div class="note">
+                  <p class="eyebrow">Built like a set</p>
+                  <h3>The Set Design Court</h3>
+                  <p>The rooftop courts take the pitched and sawtooth rooflines of the surrounding streets and flatten them into 2D panels on perforated steel posts.</p>
+                  <p>They come down as easily as they go up, and residents choose which sports are played. The same logic as a flat on a sound stage.</p>
+                </div>
+                <figure class="frame tall" data-cap="Set One Studios / Roof court"><img width="1800" height="1272" src="img/so-court.jpg" alt="Rooftop court with a purple house-shaped panel" loading="lazy"><figcaption><span><b>Roof court</b></span><span>Panels in use</span></figcaption></figure>
+              </div>
+            </div>
+
+            <div class="chap" id="so-inside">
+              <div class="chap-h"><p class="num">05</p><h3>Inside</h3><p class="chap-p">Warm, heavy timber and hempcrete inside; light, glowing polycarbonate outside. Every route between them passes through the gap.</p></div>
+              <div class="grid g2">
+                <figure class="frame tall" data-cap="Set One Studios / Entrance"><img width="1800" height="1272" src="img/so-facade.jpg" alt="Front of the polycarbonate studio under a bright sky" loading="lazy"><figcaption><span><b>Entrance</b></span><span>Day</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Set One Studios / The Yard"><img width="1800" height="1272" src="img/so-night.jpg" alt="Lit ground-floor workshop opening onto a planted yard at dusk" loading="lazy"><figcaption><span><b>The Yard</b></span><span>Dusk</span></figcaption></figure>
+              </div>
+              <div class="grid g3">
+                <figure class="frame tall" data-cap="Set One Studios / Squash court"><img width="1800" height="1272" src="img/so-squash.jpg" alt="Squash players on a perforated blue floor" loading="lazy"><figcaption><span><b>Squash court</b></span><span>Community use</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Set One Studios / Practice room"><img width="1800" height="1272" src="img/so-guitar.jpg" alt="Man playing guitar in a room lined with polycarbonate" loading="lazy"><figcaption><span><b>Practice room</b></span><span>Community use</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Set One Studios / Mezzanine"><img width="1800" height="1273" src="img/so-mezz.jpg" alt="Timber-framed mezzanine office" loading="lazy"><figcaption><span><b>Mezzanine</b></span><span>Exposed timber</span></figcaption></figure>
+              </div>
+              <div class="grid g3">
+                <figure class="frame tall" data-cap="Set One Studios / Old and new"><img width="1800" height="1272" src="img/so-gap.jpg" alt="Narrow sunlit gap between polycarbonate and brick" loading="lazy"><figcaption><span><b>Old and new</b></span><span>Interior</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Set One Studios / Corridor"><img width="1272" height="1800" src="img/so-corridor.jpg" alt="Long black and white corridor with a strip of roof light" loading="lazy"><figcaption><span><b>Corridor</b></span><span>Interior</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Set One Studios / The skybridge side"><img width="1800" height="1272" src="img/so-alley.jpg" alt="Path between the studio and existing block" loading="lazy"><figcaption><span><b>The skybridge side</b></span><span>Exterior</span></figcaption></figure>
+              </div>
+            </div>
+
+            <div class="chap" id="so-estate">
+              <div class="chap-h"><p class="num">06</p><h3>Giving back to the estate</h3><p class="chap-p">Tutor crits pushed the project to tackle the wider problems facing social housing. So Set One became the engine of an estate upgrade: part of its income flows into a Bow Upgrade Fund, and its scrap timber fuels a biomass burner for the block next door.</p></div>
+              <div class="split">
+                <figure class="frame tall" data-cap="Set One Studios / Housing upgrade"><img width="1800" height="1273" src="img/so-housing.jpg" alt="Existing housing block reclad with winter gardens" loading="lazy"><figcaption><span><b>Housing upgrade</b></span><span>Retrofit</span></figcaption></figure>
+                <div class="note">
+                  <p class="eyebrow">For residents</p>
+                  <ul class="ticks">
+                    <li>Reception, post room, bike store and a new lift</li>
+                    <li>Balconies and winter gardens</li>
+                    <li>Wash room, library and study room</li>
+                    <li>Green space and an outdoor cinema</li>
+                    <li>Squash court and the Set Design Court on the roof</li>
+                    <li>Solar power, a biomass burner and rainwater for flushing</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="grid g2">
+                <figure class="frame tall" data-cap="Set One Studios / The estate"><img width="1800" height="1272" src="img/so-estate.jpg" alt="Estate housing seen from beside the studio" loading="lazy"><figcaption><span><b>The estate</b></span><span>Context</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Set One Studios / Street approach"><img width="1800" height="1553" src="img/so-street.jpg" alt="Street approach to Set One Studios past planted verges" loading="lazy"><figcaption><span><b>Street approach</b></span><span>Context</span></figcaption></figure>
+              </div>
+              <div class="grid g2">
+                <figure class="frame tall" data-cap="Set One Studios / Axonometric, night"><img width="1800" height="1273" src="img/so-axo4.jpg" alt="Night axonometric of the studio and estate" loading="lazy"><figcaption><span><b>Axonometric</b></span><span>Night</span></figcaption></figure>
+                <figure class="frame tall" data-cap="Set One Studios / Axonometric, night"><img width="1800" height="1273" src="img/so-axo3.jpg" alt="Second night axonometric from another angle" loading="lazy"><figcaption><span><b>Axonometric</b></span><span>Night</span></figcaption></figure>
+              </div>
+              <figure class="frame" data-cap="Set One Studios / West elevation"><img width="1800" height="1273" src="img/so-elevation.jpg" alt="West elevation render against a grey sky" loading="lazy"><figcaption><span><b>West elevation</b></span><span>Rendered</span></figcaption></figure>
+            </div>
+          </article>
+
           <article class="project" id="light">
-            <div class="shead"><div><p class="eyebrow">Digital Culture module</p><h2>Light studies</h2></div><p class="lede">A lamp designed and lit from scratch, testing how one warm source sets the mood of a room.</p></div>
+            <div class="shead"><div><p class="eyebrow">Digital Culture module</p><h2>Light studies</h2></div><p class="lede">An everyday IKEA lamp, measured by hand, then rebuilt digitally piece by piece: modelled, drawn and rendered to test how light, material and form read on screen. A study in looking closely at an object and making it believable, the same skill a prop drawing needs.</p></div>
             <div class="grid g4">
-              <figure class="frame sq" data-cap="Bulb"><img src="img/dc-bulb.jpg" alt="Glowing filament bulb" loading="lazy"><figcaption><span><b>Bulb</b></span><span>Close</span></figcaption></figure>
-              <figure class="frame sq" data-cap="Lamp"><img src="img/dc-lamp.jpg" alt="Lamp on a desk" loading="lazy"><figcaption><span><b>Lamp</b></span><span>Medium</span></figcaption></figure>
-              <figure class="frame sq" data-cap="Desk"><img src="img/dc-desk.jpg" alt="Dark desk lit by one lamp" loading="lazy"><figcaption><span><b>Desk</b></span><span>Wide</span></figcaption></figure>
-              <figure class="frame sq" data-cap="Base"><img src="img/dc-base.jpg" alt="Concrete lamp base with crystal filament" loading="lazy"><figcaption><span><b>Base</b></span><span>Detail</span></figcaption></figure>
+              <figure class="frame sq" data-cap="Light studies / Bulb"><img width="1800" height="1800" src="img/dc-bulb.jpg" alt="Glowing filament bulb" loading="lazy"><figcaption><span><b>Bulb</b></span><span>Close</span></figcaption></figure>
+              <figure class="frame sq" data-cap="Light studies / Lamp"><img width="1800" height="1553" src="img/dc-lamp.jpg" alt="Lamp on a desk" loading="lazy"><figcaption><span><b>Lamp</b></span><span>Medium</span></figcaption></figure>
+              <figure class="frame sq" data-cap="Light studies / Desk"><img width="1800" height="1800" src="img/dc-desk.jpg" alt="Dark desk lit by one lamp" loading="lazy"><figcaption><span><b>Desk</b></span><span>Wide</span></figcaption></figure>
+              <figure class="frame sq" data-cap="Light studies / Base"><img width="1800" height="1800" src="img/dc-base.jpg" alt="Concrete lamp base with crystal filament" loading="lazy"><figcaption><span><b>Base</b></span><span>Detail</span></figcaption></figure>
             </div>
           </article>
         </div>
@@ -759,12 +1009,26 @@ html{-webkit-tap-highlight-color:transparent}
   <div class="wrap">
     <section class="part" style="padding-bottom:0">
       <p class="eyebrow">Photography</p>
-      <h2 class="part-title">Places, in chapters</h2>
-      <p class="lede part-lede">Each chapter is one place and the days I spent there. Pick one to start.</p>
+      <h2 class="part-title">Places and rituals</h2>
+      <p class="lede part-lede">Each chapter is one place. The series follow one subject across several nights or days. Pick one to start.</p>
+      <p class="ch-group mono">Places</p>
       <div class="chapters-index">
-        <a class="ch-card" href="#kochi"><img src="img/ph-DSC00046.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Kochi, India</b><span>Dec 2025 / 26 frames</span></span></a>
-        <a class="ch-card" href="#elsewhere"><img src="img/ph-IMG_4114.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Unsorted</b><span>2 frames</span></span></a>
-        <div class="ch-card empty"><b>Oxford, Norfolk, Cambridge</b></div>
+        <a class="ch-card" href="#kochi"><img width="1600" height="1067" src="img/ph-DSC00046.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Kochi, India</b><span>Dec 2025 / 26 frames</span></span></a>
+        <a class="ch-card" href="#ph-iceland"><img width="1600" height="1066" src="img/ph-iceland-13.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Iceland</b><span>Feb 2024 / 18 frames</span></span></a>
+        <a class="ch-card" href="#ph-switzerland"><img width="1600" height="1066" src="img/ph-switzerland-03.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Switzerland</b><span>Dec 2023 / 16 frames</span></span></a>
+        <a class="ch-card" href="#ph-london"><img width="1600" height="1066" src="img/ph-london-05.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>London</b><span>Feb 2024 / 21 frames</span></span></a>
+        <a class="ch-card" href="#ph-cannes"><img width="1514" height="1012" src="img/ph-cannes-02.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Cannes, France</b><span>Aug 2025 / 14 frames</span></span></a>
+        <a class="ch-card" href="#ph-croatia"><img width="1600" height="1061" src="img/ph-croatia-06.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Croatia</b><span>10 frames</span></span></a>
+        <a class="ch-card" href="#ph-salcombe"><img width="1600" height="1066" src="img/ph-salcombe-11.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Salcombe, Devon</b><span>2025 to 2026 / 12 frames</span></span></a>
+        <a class="ch-card" href="#ph-norfolk"><img width="1600" height="1066" src="img/ph-norfolk-12.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Norfolk</b><span>2023 to 2024 / 17 frames</span></span></a>
+        <a class="ch-card" href="#ph-oxford"><img width="1600" height="1066" src="img/ph-oxford-02.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Oxford</b><span>2024 / 8 frames</span></span></a>
+        <a class="ch-card" href="#ph-cambridge"><img width="1600" height="1061" src="img/ph-cambridge-03.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Cambridge</b><span>3 frames</span></span></a>
+        <a class="ch-card" href="#ph-ickworth"><img width="1600" height="991" src="img/ph-ickworth-05.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Ickworth, Suffolk</b><span>2023 to 2026 / 5 frames</span></span></a>
+      </div>
+      <p class="ch-group mono">Series</p>
+      <div class="chapters-index">
+        <a class="ch-card" href="#ph-rituals"><img width="1159" height="1600" src="img/ph-decks-07.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Rituals</b><span>Series / 21 frames</span></span></a>
+        <a class="ch-card" href="#ph-materiality"><img width="1066" height="1600" src="img/ph-material-01.jpg" alt="" loading="lazy" draggable="false"><span class="c"><b>Exploring materiality</b><span>Series / 4 frames</span></span></a>
       </div>
     </section>
 
@@ -773,52 +1037,305 @@ html{-webkit-tap-highlight-color:transparent}
         <div><p class="num">Chapter 01</p><h2>Kochi, India</h2><p class="mono muted" style="margin:10px 0 0">12 to 19 December 2025</p></div>
         <p class="story todo">Your story goes here: why you went, what the city felt like, what you were looking for with the camera. Three or four sentences.</p>
       </div>
-      <figure class="ch-cover" data-cap="Kochi, India / 19 Dec 2025"><img src="img/ph-DSC00046.jpg" alt="Fishermen hauling nets at dawn, black and white" draggable="false"></figure>
+      <figure class="ch-cover" data-cap="Kochi, India / 19 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC00046.jpg" alt="Fishermen hauling nets at dawn, black and white" draggable="false"></figure>
       <div class="photos">
 <p class="day">12 Dec 2025</p>
-<figure data-cap="Kochi, India / 12 Dec 2025"><img src="img/ph-DSC06983.jpg" alt="Photograph, Kochi, 12 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 12 Dec 2025"><img src="img/ph-DSC06995.jpg" alt="Photograph, Kochi, 12 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 12 Dec 2025"><img src="img/ph-DSC07219.jpg" alt="Photograph, Kochi, 12 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 12 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC06983.jpg" alt="Photograph, Kochi, 12 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 12 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC06995.jpg" alt="Photograph, Kochi, 12 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 12 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC07219.jpg" alt="Photograph, Kochi, 12 Dec" loading="lazy" draggable="false"></figure>
 <p class="day">13 Dec 2025</p>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07258.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07275-2.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07325.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07362.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07394.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07443-2.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07472.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07491.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07601.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07608-2.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 13 Dec 2025"><img src="img/ph-DSC07652.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC07258.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC07275-2.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC07325.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC07362.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC07394.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC07443-2.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC07472.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC07491.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC07601.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="900" height="1600" src="img/ph-DSC07608-2.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 13 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC07652.jpg" alt="Photograph, Kochi, 13 Dec" loading="lazy" draggable="false"></figure>
 <p class="day">14 Dec 2025</p>
-<figure data-cap="Kochi, India / 14 Dec 2025"><img src="img/ph-DSC07895.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 14 Dec 2025"><img src="img/ph-DSC08224.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 14 Dec 2025"><img src="img/ph-DSC08307.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 14 Dec 2025"><img src="img/ph-DSC08333.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 14 Dec 2025"><img src="img/ph-DSC08456.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 14 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC07895.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 14 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC08224.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 14 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC08307.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 14 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC08333.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 14 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC08456.jpg" alt="Photograph, Kochi, 14 Dec" loading="lazy" draggable="false"></figure>
 <p class="day">15 Dec 2025</p>
-<figure data-cap="Kochi, India / 15 Dec 2025"><img src="img/ph-DSC08519.jpg" alt="Photograph, Kochi, 15 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 15 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC08519.jpg" alt="Photograph, Kochi, 15 Dec" loading="lazy" draggable="false"></figure>
 <p class="day">17 Dec 2025</p>
-<figure data-cap="Kochi, India / 17 Dec 2025"><img src="img/ph-DSC09354.jpg" alt="Photograph, Kochi, 17 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 17 Dec 2025"><img src="img/ph-DSC09399.jpg" alt="Photograph, Kochi, 17 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 17 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC09354.jpg" alt="Photograph, Kochi, 17 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 17 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC09399.jpg" alt="Photograph, Kochi, 17 Dec" loading="lazy" draggable="false"></figure>
 <p class="day">18 Dec 2025</p>
-<figure data-cap="Kochi, India / 18 Dec 2025"><img src="img/ph-DSC09506.jpg" alt="Photograph, Kochi, 18 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 18 Dec 2025"><img src="img/ph-DSC09518.jpg" alt="Photograph, Kochi, 18 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 18 Dec 2025"><img width="1600" height="1067" src="img/ph-DSC09506.jpg" alt="Photograph, Kochi, 18 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 18 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC09518.jpg" alt="Photograph, Kochi, 18 Dec" loading="lazy" draggable="false"></figure>
 <p class="day">19 Dec 2025</p>
-<figure data-cap="Kochi, India / 19 Dec 2025"><img src="img/ph-DSC00035-2.jpg" alt="Photograph, Kochi, 19 Dec" loading="lazy" draggable="false"></figure>
-<figure data-cap="Kochi, India / 19 Dec 2025"><img src="img/ph-DSC00041.jpg" alt="Photograph, Kochi, 19 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 19 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC00035-2.jpg" alt="Photograph, Kochi, 19 Dec" loading="lazy" draggable="false"></figure>
+<figure data-cap="Kochi, India / 19 Dec 2025"><img width="1067" height="1600" src="img/ph-DSC00041.jpg" alt="Photograph, Kochi, 19 Dec" loading="lazy" draggable="false"></figure>
       </div>
     </section>
 
-    <section class="chapter" id="elsewhere">
+    <section class="chapter" id="ph-iceland">
       <div class="ch-head">
-        <div><p class="num">Unsorted</p><h2>To be placed</h2></div>
-        <p class="story todo">Tell me where these were taken and they move into their own chapter.</p>
-      </div>
+        <div><p class="num">Chapter 02</p><h2>Iceland</h2><p class="mono muted" style="margin:10px 0 0">3 to 5 February 2024</p></div>
+              </div>
+      <figure class="ch-cover" data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-13.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
       <div class="photos">
-        <figure data-cap="Unsorted"><img src="img/ph-IMG_4114.jpg" alt="Snowy mountain ridges, black and white" loading="lazy" draggable="false"></figure>
-        <figure data-cap="Unsorted / 25 Dec 2024"><img src="img/ph-IMG_4153.jpg" alt="Stone courtyard and window in shadow" loading="lazy" draggable="false"></figure>
+<figure data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-01.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Iceland / Feb 2024"><img width="1066" height="1600" src="img/ph-iceland-02.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Iceland / Feb 2024"><img width="1066" height="1600" src="img/ph-iceland-03.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-04.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Iceland / Feb 2024"><img width="1066" height="1600" src="img/ph-iceland-05.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Iceland / Feb 2024"><img width="1066" height="1600" src="img/ph-iceland-06.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-07.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-08.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Iceland / Feb 2024"><img width="1066" height="1600" src="img/ph-iceland-09.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-10.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-11.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Iceland / Feb 2024"><img width="1066" height="1600" src="img/ph-iceland-12.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-13.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-14.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-15.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Iceland / Feb 2024"><img width="1066" height="1600" src="img/ph-iceland-16.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Iceland / Feb 2024"><img width="1600" height="1066" src="img/ph-iceland-17.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Iceland / Feb 2024"><img width="1066" height="1600" src="img/ph-iceland-18.jpg" alt="Photograph, Iceland" loading="lazy" draggable="false"></figure>
+      </div>
+      <button class="btn more-btn" type="button">Show all 18 frames</button>
+    </section>
+
+    <section class="chapter" id="ph-switzerland">
+      <div class="ch-head">
+        <div><p class="num">Chapter 03</p><h2>Switzerland</h2><p class="mono muted" style="margin:10px 0 0">December 2023</p></div>
+              </div>
+      <figure class="ch-cover" data-cap="Switzerland / Dec 2023"><img width="1600" height="1066" src="img/ph-switzerland-03.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+      <div class="photos">
+<figure data-cap="Switzerland / Dec 2023"><img width="1066" height="1600" src="img/ph-switzerland-01.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Switzerland / Dec 2023"><img width="1066" height="1600" src="img/ph-switzerland-02.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Switzerland / Dec 2023"><img width="1600" height="1066" src="img/ph-switzerland-03.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Switzerland / Dec 2023"><img width="1066" height="1600" src="img/ph-switzerland-04.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Switzerland / Dec 2023"><img width="1600" height="1066" src="img/ph-switzerland-05.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Switzerland / Dec 2023"><img width="1600" height="1066" src="img/ph-switzerland-06.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Switzerland / Dec 2023"><img width="1600" height="1066" src="img/ph-switzerland-07.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Switzerland / Dec 2023"><img width="1600" height="1066" src="img/ph-switzerland-08.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure data-cap="Switzerland / Dec 2023"><img width="1600" height="1066" src="img/ph-switzerland-09.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Switzerland / Dec 2023"><img width="1066" height="1600" src="img/ph-switzerland-10.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Switzerland / Dec 2023"><img width="1600" height="1066" src="img/ph-switzerland-11.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Switzerland / Dec 2023"><img width="1066" height="1600" src="img/ph-switzerland-12.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Switzerland / Dec 2023"><img width="1066" height="1600" src="img/ph-switzerland-13.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Switzerland / Dec 2023"><img width="1066" height="1600" src="img/ph-switzerland-14.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Switzerland / Dec 2023"><img width="1600" height="1116" src="img/ph-switzerland-15.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Switzerland / Dec 2023"><img width="1066" height="1600" src="img/ph-switzerland-16.jpg" alt="Photograph, Switzerland" loading="lazy" draggable="false"></figure>
+      </div>
+      <button class="btn more-btn" type="button">Show all 16 frames</button>
+    </section>
+
+    <section class="chapter" id="ph-london">
+      <div class="ch-head">
+        <div><p class="num">Chapter 04</p><h2>London</h2><p class="mono muted" style="margin:10px 0 0">17 and 18 February 2024</p></div>
+              </div>
+      <figure class="ch-cover" data-cap="London / Feb 2024"><img width="1600" height="1066" src="img/ph-london-05.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+      <div class="photos">
+<figure data-cap="London / Feb 2024"><img width="1600" height="1066" src="img/ph-london-01.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-02.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure data-cap="London / Feb 2024"><img width="1600" height="1075" src="img/ph-london-03.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-04.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure data-cap="London / Feb 2024"><img width="1600" height="1066" src="img/ph-london-05.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-06.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-07.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure data-cap="London / Feb 2024"><img width="1280" height="1600" src="img/ph-london-08.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-09.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1600" height="1066" src="img/ph-london-10.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1600" height="1066" src="img/ph-london-11.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1280" height="1600" src="img/ph-london-12.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1280" height="1600" src="img/ph-london-13.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1280" height="1600" src="img/ph-london-14.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-15.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1280" height="1600" src="img/ph-london-16.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-17.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1600" height="1066" src="img/ph-london-18.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-19.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-20.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="London / Feb 2024"><img width="1066" height="1600" src="img/ph-london-21.jpg" alt="Photograph, London" loading="lazy" draggable="false"></figure>
+      </div>
+      <button class="btn more-btn" type="button">Show all 21 frames</button>
+    </section>
+
+    <section class="chapter" id="ph-cannes">
+      <div class="ch-head">
+        <div><p class="num">Chapter 05</p><h2>Cannes, France</h2><p class="mono muted" style="margin:10px 0 0">24 to 30 August 2025</p></div>
+              </div>
+      <figure class="ch-cover" data-cap="Cannes, France / Aug 2025"><img width="1514" height="1012" src="img/ph-cannes-02.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+      <div class="photos">
+<figure data-cap="Cannes, France / Aug 2025"><img width="1587" height="1060" src="img/ph-cannes-01.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cannes, France / Aug 2025"><img width="1514" height="1012" src="img/ph-cannes-02.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cannes, France / Aug 2025"><img width="1069" height="1600" src="img/ph-cannes-03.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cannes, France / Aug 2025"><img width="1069" height="1600" src="img/ph-cannes-04.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cannes, France / Aug 2025"><img width="1058" height="1600" src="img/ph-cannes-05.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cannes, France / Aug 2025"><img width="922" height="1600" src="img/ph-cannes-06.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cannes, France / Aug 2025"><img width="1069" height="1600" src="img/ph-cannes-07.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cannes, France / Aug 2025"><img width="952" height="1452" src="img/ph-cannes-08.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cannes, France / Aug 2025"><img width="1600" height="1069" src="img/ph-cannes-09.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Cannes, France / Aug 2025"><img width="1069" height="1600" src="img/ph-cannes-10.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Cannes, France / Aug 2025"><img width="986" height="1600" src="img/ph-cannes-11.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Cannes, France / Aug 2025"><img width="1069" height="1600" src="img/ph-cannes-12.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Cannes, France / Aug 2025"><img width="1069" height="1600" src="img/ph-cannes-13.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Cannes, France / Aug 2025"><img width="1069" height="1600" src="img/ph-cannes-14.jpg" alt="Photograph, Cannes, France" loading="lazy" draggable="false"></figure>
+      </div>
+      <button class="btn more-btn" type="button">Show all 14 frames</button>
+    </section>
+
+    <section class="chapter" id="ph-croatia">
+      <div class="ch-head">
+        <div><p class="num">Chapter 06</p><h2>Croatia</h2></div>
+              </div>
+      <figure class="ch-cover" data-cap="Croatia"><img width="1600" height="1061" src="img/ph-croatia-06.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+      <div class="photos">
+<figure data-cap="Croatia"><img width="1061" height="1600" src="img/ph-croatia-01.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+<figure data-cap="Croatia"><img width="1600" height="1061" src="img/ph-croatia-02.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+<figure data-cap="Croatia"><img width="1600" height="1397" src="img/ph-croatia-03.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+<figure data-cap="Croatia"><img width="1061" height="1600" src="img/ph-croatia-04.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+<figure data-cap="Croatia"><img width="1066" height="1600" src="img/ph-croatia-05.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+<figure data-cap="Croatia"><img width="1600" height="1061" src="img/ph-croatia-06.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+<figure data-cap="Croatia"><img width="1066" height="1600" src="img/ph-croatia-07.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+<figure data-cap="Croatia"><img width="1600" height="1061" src="img/ph-croatia-08.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+<figure data-cap="Croatia"><img width="900" height="1600" src="img/ph-croatia-09.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Croatia"><img width="1061" height="1600" src="img/ph-croatia-10.jpg" alt="Photograph, Croatia" loading="lazy" draggable="false"></figure>
+      </div>
+      <button class="btn more-btn" type="button">Show all 10 frames</button>
+    </section>
+
+    <section class="chapter" id="ph-salcombe">
+      <div class="ch-head">
+        <div><p class="num">Chapter 07</p><h2>Salcombe, Devon</h2><p class="mono muted" style="margin:10px 0 0">August 2025 and 2026</p></div>
+              </div>
+      <figure class="ch-cover" data-cap="Salcombe, Devon"><img width="1600" height="1066" src="img/ph-salcombe-11.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+      <div class="photos">
+<figure data-cap="Salcombe, Devon"><img width="1069" height="1600" src="img/ph-salcombe-01.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure data-cap="Salcombe, Devon"><img width="1069" height="1600" src="img/ph-salcombe-02.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure data-cap="Salcombe, Devon"><img width="1069" height="1600" src="img/ph-salcombe-03.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure data-cap="Salcombe, Devon"><img width="1032" height="1600" src="img/ph-salcombe-04.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure data-cap="Salcombe, Devon"><img width="1600" height="1069" src="img/ph-salcombe-05.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure data-cap="Salcombe, Devon"><img width="1069" height="1600" src="img/ph-salcombe-06.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure data-cap="Salcombe, Devon"><img width="1069" height="1600" src="img/ph-salcombe-07.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure data-cap="Salcombe, Devon"><img width="1066" height="1600" src="img/ph-salcombe-08.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure data-cap="Salcombe, Devon"><img width="1600" height="1066" src="img/ph-salcombe-09.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Salcombe, Devon"><img width="1066" height="1600" src="img/ph-salcombe-10.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Salcombe, Devon"><img width="1600" height="1066" src="img/ph-salcombe-11.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Salcombe, Devon"><img width="1600" height="1066" src="img/ph-salcombe-12.jpg" alt="Photograph, Salcombe, Devon" loading="lazy" draggable="false"></figure>
+      </div>
+      <button class="btn more-btn" type="button">Show all 12 frames</button>
+    </section>
+
+    <section class="chapter" id="ph-norfolk">
+      <div class="ch-head">
+        <div><p class="num">Chapter 08</p><h2>Norfolk</h2><p class="mono muted" style="margin:10px 0 0">2023 to 2024</p></div>
+              </div>
+      <figure class="ch-cover" data-cap="Norfolk"><img width="1600" height="1066" src="img/ph-norfolk-12.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+      <div class="photos">
+<figure data-cap="Norfolk"><img width="1061" height="1600" src="img/ph-norfolk-01.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Norfolk"><img width="1280" height="1600" src="img/ph-norfolk-02.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Norfolk"><img width="1280" height="1600" src="img/ph-norfolk-03.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Norfolk"><img width="1600" height="1066" src="img/ph-norfolk-04.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Norfolk"><img width="1062" height="1600" src="img/ph-norfolk-05.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Norfolk"><img width="1600" height="1066" src="img/ph-norfolk-06.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Norfolk"><img width="1066" height="1600" src="img/ph-norfolk-07.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Norfolk"><img width="1600" height="1066" src="img/ph-norfolk-08.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Norfolk"><img width="1066" height="1600" src="img/ph-norfolk-09.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Norfolk"><img width="1600" height="1066" src="img/ph-norfolk-10.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Norfolk"><img width="1066" height="1600" src="img/ph-norfolk-11.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Norfolk"><img width="1600" height="1066" src="img/ph-norfolk-12.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Norfolk"><img width="1600" height="1066" src="img/ph-norfolk-13.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Norfolk"><img width="1066" height="1600" src="img/ph-norfolk-14.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Norfolk"><img width="1061" height="1600" src="img/ph-norfolk-15.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Norfolk"><img width="1061" height="1600" src="img/ph-norfolk-16.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+<figure class="more" data-cap="Norfolk"><img width="1280" height="1600" src="img/ph-norfolk-17.jpg" alt="Photograph, Norfolk" loading="lazy" draggable="false"></figure>
+      </div>
+      <button class="btn more-btn" type="button">Show all 17 frames</button>
+    </section>
+
+    <section class="chapter" id="ph-oxford">
+      <div class="ch-head">
+        <div><p class="num">Chapter 09</p><h2>Oxford</h2><p class="mono muted" style="margin:10px 0 0">2024</p></div>
+              </div>
+      <figure class="ch-cover" data-cap="Oxford / 2024"><img width="1600" height="1066" src="img/ph-oxford-02.jpg" alt="Photograph, Oxford" loading="lazy" draggable="false"></figure>
+      <div class="photos">
+<figure data-cap="Oxford / 2024"><img width="1280" height="1600" src="img/ph-oxford-01.jpg" alt="Photograph, Oxford" loading="lazy" draggable="false"></figure>
+<figure data-cap="Oxford / 2024"><img width="1600" height="1066" src="img/ph-oxford-02.jpg" alt="Photograph, Oxford" loading="lazy" draggable="false"></figure>
+<figure data-cap="Oxford / 2024"><img width="1280" height="1600" src="img/ph-oxford-03.jpg" alt="Photograph, Oxford" loading="lazy" draggable="false"></figure>
+<figure data-cap="Oxford / 2024"><img width="1066" height="1600" src="img/ph-oxford-04.jpg" alt="Photograph, Oxford" loading="lazy" draggable="false"></figure>
+<figure data-cap="Oxford / 2024"><img width="1600" height="1066" src="img/ph-oxford-05.jpg" alt="Photograph, Oxford" loading="lazy" draggable="false"></figure>
+<figure data-cap="Oxford / 2024"><img width="1280" height="1600" src="img/ph-oxford-06.jpg" alt="Photograph, Oxford" loading="lazy" draggable="false"></figure>
+<figure data-cap="Oxford / 2024"><img width="1033" height="1600" src="img/ph-oxford-07.jpg" alt="Photograph, Oxford" loading="lazy" draggable="false"></figure>
+<figure data-cap="Oxford / 2024"><img width="1280" height="1600" src="img/ph-oxford-08.jpg" alt="Photograph, Oxford" loading="lazy" draggable="false"></figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="ph-cambridge">
+      <div class="ch-head">
+        <div><p class="num">Chapter 10</p><h2>Cambridge</h2></div>
+              </div>
+      <figure class="ch-cover" data-cap="Cambridge"><img width="1600" height="1061" src="img/ph-cambridge-03.jpg" alt="Photograph, Cambridge" loading="lazy" draggable="false"></figure>
+      <div class="photos">
+<figure data-cap="Cambridge"><img width="1061" height="1600" src="img/ph-cambridge-01.jpg" alt="Photograph, Cambridge" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cambridge"><img width="1061" height="1600" src="img/ph-cambridge-02.jpg" alt="Photograph, Cambridge" loading="lazy" draggable="false"></figure>
+<figure data-cap="Cambridge"><img width="1600" height="1061" src="img/ph-cambridge-03.jpg" alt="Photograph, Cambridge" loading="lazy" draggable="false"></figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="ph-ickworth">
+      <div class="ch-head">
+        <div><p class="num">Chapter 11</p><h2>Ickworth, Suffolk</h2><p class="mono muted" style="margin:10px 0 0">2023 to 2026</p></div>
+              </div>
+      <figure class="ch-cover" data-cap="Ickworth, Suffolk"><img width="1600" height="991" src="img/ph-ickworth-05.jpg" alt="Photograph, Ickworth, Suffolk" loading="lazy" draggable="false"></figure>
+      <div class="photos">
+<figure data-cap="Ickworth, Suffolk"><img width="1061" height="1600" src="img/ph-ickworth-01.jpg" alt="Photograph, Ickworth, Suffolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Ickworth, Suffolk"><img width="1066" height="1600" src="img/ph-ickworth-02.jpg" alt="Photograph, Ickworth, Suffolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Ickworth, Suffolk"><img width="1066" height="1600" src="img/ph-ickworth-03.jpg" alt="Photograph, Ickworth, Suffolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Ickworth, Suffolk"><img width="1600" height="1066" src="img/ph-ickworth-04.jpg" alt="Photograph, Ickworth, Suffolk" loading="lazy" draggable="false"></figure>
+<figure data-cap="Ickworth, Suffolk"><img width="1600" height="991" src="img/ph-ickworth-05.jpg" alt="Photograph, Ickworth, Suffolk" loading="lazy" draggable="false"></figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="ph-rituals">
+      <div class="ch-head">
+        <div><p class="num">Series 01</p><h2>Rituals</h2><p class="mono muted" style="margin:10px 0 0">2024 to 2025</p></div>
+              </div>
+      <div class="photos">
+<p class="day">The decks / House of Hendo, Feb 2025</p>
+<figure data-cap="Rituals / The decks"><img width="1159" height="1600" src="img/ph-decks-01.jpg" alt="Photograph, The decks" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / The decks"><img width="1200" height="1600" src="img/ph-decks-02.jpg" alt="Photograph, The decks" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / The decks"><img width="1200" height="1600" src="img/ph-decks-03.jpg" alt="Photograph, The decks" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / The decks"><img width="1200" height="1600" src="img/ph-decks-04.jpg" alt="Photograph, The decks" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / The decks"><img width="1200" height="1600" src="img/ph-decks-05.jpg" alt="Photograph, The decks" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / The decks"><img width="1200" height="1600" src="img/ph-decks-06.jpg" alt="Photograph, The decks" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / The decks"><img width="1159" height="1600" src="img/ph-decks-07.jpg" alt="Photograph, The decks" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / The decks"><img width="1086" height="1600" src="img/ph-decks-08.jpg" alt="Photograph, The decks" loading="lazy" draggable="false"></figure>
+<p class="day">Jäger party / 2025</p>
+<figure data-cap="Rituals / Jäger party"><img width="1600" height="1600" src="img/ph-jager-01.jpg" alt="Photograph, Jäger party" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Jäger party"><img width="1600" height="1066" src="img/ph-jager-02.jpg" alt="Photograph, Jäger party" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Jäger party"><img width="1600" height="1066" src="img/ph-jager-03.jpg" alt="Photograph, Jäger party" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Jäger party"><img width="1089" height="1600" src="img/ph-jager-04.jpg" alt="Photograph, Jäger party" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Jäger party"><img width="1600" height="1066" src="img/ph-jager-05.jpg" alt="Photograph, Jäger party" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Jäger party"><img width="1600" height="1066" src="img/ph-jager-06.jpg" alt="Photograph, Jäger party" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Jäger party"><img width="1066" height="1600" src="img/ph-jager-07.jpg" alt="Photograph, Jäger party" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Jäger party"><img width="1066" height="1600" src="img/ph-jager-08.jpg" alt="Photograph, Jäger party" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Jäger party"><img width="1600" height="1066" src="img/ph-jager-09.jpg" alt="Photograph, Jäger party" loading="lazy" draggable="false"></figure>
+<p class="day">Rolling, and a spider / 2024</p>
+<figure data-cap="Rituals / Rolling, and a spider"><img width="1066" height="1600" src="img/ph-rolling-01.jpg" alt="Photograph, Rolling, and a spider" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Rolling, and a spider"><img width="1066" height="1600" src="img/ph-rolling-02.jpg" alt="Photograph, Rolling, and a spider" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Rolling, and a spider"><img width="1066" height="1600" src="img/ph-rolling-03.jpg" alt="Photograph, Rolling, and a spider" loading="lazy" draggable="false"></figure>
+<figure data-cap="Rituals / Rolling, and a spider"><img width="1066" height="1600" src="img/ph-rolling-04.jpg" alt="Photograph, Rolling, and a spider" loading="lazy" draggable="false"></figure>
+      </div>
+    </section>
+    <section class="chapter" id="ph-materiality">
+      <div class="ch-head">
+        <div><p class="num">Series 02</p><h2>Exploring materiality</h2></div>
+              </div>
+      <div class="photos photos-2">
+<figure data-cap="Exploring materiality"><img width="1066" height="1600" src="img/ph-material-01.jpg" alt="Close-up of a ribbed sheet material" loading="lazy" draggable="false"></figure>
+<figure data-cap="Exploring materiality"><img width="1600" height="1066" src="img/ph-material-02.jpg" alt="Close-up of a ribbed sheet material" loading="lazy" draggable="false"></figure>
+<figure data-cap="Exploring materiality"><img width="1066" height="1600" src="img/ph-material-03.jpg" alt="Close-up of a ribbed sheet material" loading="lazy" draggable="false"></figure>
+<figure data-cap="Exploring materiality"><img width="1600" height="1035" src="img/ph-material-04.jpg" alt="Close-up of a ribbed sheet material" loading="lazy" draggable="false"></figure>
       </div>
     </section>
     <p class="copy-note" style="margin-top:40px">All photographs © Orlando Adams. Please ask before using any image.</p>
@@ -827,8 +1344,9 @@ html{-webkit-tap-highlight-color:transparent}
 </main>
 <footer><div class="wrap mono"><span>© Orlando Adams 2026. All images are my own and may not be reused without permission.</span><span>07484 750 932 / adamsorlando111@gmail.com</span></div></footer>
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="lb-tools"><button class="btn" id="lbOut" type="button" aria-label="Zoom out">&minus;</button><button class="btn" id="lbIn" type="button" aria-label="Zoom in">+</button><button class="btn" id="lbFit" type="button">Fit</button><span class="lb-tip" id="lbTip"></span></div>
   <button class="btn" id="lbClose" type="button">Close</button>
-  <img id="lbImg" alt="">
+  <div class="lb-stage" id="lbStage"><img id="lbImg" alt=""></div>
   <p id="lbCap"></p>
 </div>
 
@@ -885,15 +1403,15 @@ html{-webkit-tap-highlight-color:transparent}
   var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(relines,200); });
 
   /* ---------- wrap images so they can be masked and drift ---------- */
-  document.querySelectorAll('.frame > img, .plate > img, .ch-cover > img, .photos figure > img, .portrait > img').forEach(function(img){
+  document.querySelectorAll('.frame > img, .plate > img, .sheet-main > img, .ch-cover > img, .photos figure > img, .portrait > img').forEach(function(img){
     var s=document.createElement('span'); s.className='pic'; img.parentNode.insertBefore(s,img); s.appendChild(img);
   });
   document.querySelectorAll('.frame .pic img, .ch-cover .pic img').forEach(function(i){ i.setAttribute('data-par','0.06'); });
 
   /* ---------- tag reveal targets, stagger siblings ---------- */
-  var textSel='.eyebrow,.lede,.note p,.note h3,.story,.glance,.facts,.best-head .btn,.clist,.cv-actions,.essay,.soon,.day,.ch-head .mono,.part-lede,.contact-block .muted,.i2-p,.copy-note';
+  var textSel='.chap-p,.tdec,.ticks,.unit-steps,.pnav,.lv-tabs,.eyebrow,.lede,.note p,.note h3,.story,.glance,.facts,.best-head .btn,.clist,.cv-actions,.essay,.soon,.day,.ch-head .mono,.part-lede,.contact-block .muted,.i2-p,.copy-note';
   document.querySelectorAll(textSel).forEach(function(el){ if(!el.closest('[data-reveal]')&&!el.hasAttribute('data-split')) el.setAttribute('data-reveal',''); });
-  document.querySelectorAll('.frame,.plate,.tile,.ch-card,.ch-cover,.photos figure,.portrait,.models figure').forEach(function(el){ el.setAttribute('data-rimg',''); });
+  document.querySelectorAll('.frame,.plate,.sheet-main,.tile,.ch-card,.ch-cover,.photos figure,.portrait,.models figure').forEach(function(el){ el.setAttribute('data-rimg',''); });
   document.querySelectorAll('.grid,.best,.photos,.chapters-index,.years,.glance').forEach(function(g){
     var n=0; Array.prototype.forEach.call(g.children,function(c){
       if(c.classList.contains('day')){n=0;return;}
@@ -962,7 +1480,8 @@ html{-webkit-tap-highlight-color:transparent}
 
   /* ---------- routing with a curtain between pages ---------- */
   var views={home:1,architecture:1,photography:1,written:1};
-  var sub={"set-one":"year2","common-ground":"year2","light":"year2","offset":"year2","capoeira":"year1","graduation-station":"year1","alevels":"alevels","terrarium":"alevels","year1":"year1","year2":"year2","year3":"year3","contact":"home","intro":"home","kochi":"photography","elsewhere":"photography"};
+  var sub={"set-one":"year2","common-ground":"year2","light":"year2","offset":"year2","capoeira":"year1","graduation-station":"year1","alevels":"alevels","terrarium":"alevels","year1":"year1","year2":"year2","year3":"year3","contact":"home","intro":"home","kochi":"photography","cg-plans":"year2","cg-construction":"year2","cg-spaces":"year2","so-site":"year2","so-sets":"year2","so-plans":"year2","so-construction":"year2","so-inside":"year2","so-estate":"year2"};
+  document.querySelectorAll('section.chapter[id]').forEach(function(c){ if(!sub[c.id]) sub[c.id]="photography"; });
   var current=null, curtain=document.getElementById('curtain');
   function resolve(h){ return views[h]?h:(sub[h]?(views[sub[h]]?sub[h]:'architecture'):'home'); }
   function show(h,v,imm){
@@ -1052,35 +1571,114 @@ html{-webkit-tap-highlight-color:transparent}
     });
   }
 
-  /* ---------- lightbox: swipe or arrow keys through a project, swipe down to close ---------- */
-  var lb=document.getElementById('lb'),img=document.getElementById('lbImg'),cap=document.getElementById('lbCap'),last=null,set=[],at=0;
+  /* ---------- lightbox: swipe or arrow keys through a project, zoom and pan drawings ---------- */
+  var lb=document.getElementById('lb'),img=document.getElementById('lbImg'),cap=document.getElementById('lbCap'),stage=document.getElementById('lbStage'),tip=document.getElementById('lbTip'),last=null,set=[],at=0;
+  var Z={s:1,x:0,y:0};
+  function apply(){ img.style.transform=Z.s===1?'':'translate('+Z.x+'px,'+Z.y+'px) scale('+Z.s+')'; lb.classList.toggle('zoomed',Z.s>1.001); }
+  function reset(){ Z.s=1; Z.x=0; Z.y=0; apply(); }
+  function maxS(){ var w=img.offsetWidth||1; return Math.max(3,(img.naturalWidth/w)*1.25); }
+  function clampPan(){
+    if(Z.s<=1){ Z.x=0; Z.y=0; return; }
+    var w=img.offsetWidth*Z.s, h=img.offsetHeight*Z.s, sr=stage.getBoundingClientRect();
+    var bl=img.offsetLeft, bt=img.offsetTop; /* untransformed position inside the stage */
+    var minX=sr.width-bl-w, maxX=-bl, minY=sr.height-bt-h, maxY=-bt;
+    if(w<sr.width){ Z.x=(sr.width-w)/2-bl; } else Z.x=Math.min(maxX,Math.max(minX,Z.x));
+    if(h<sr.height){ Z.y=(sr.height-h)/2-bt; } else Z.y=Math.min(maxY,Math.max(minY,Z.y));
+  }
+  function zoomAt(cx,cy,ns){
+    ns=Math.max(1,Math.min(maxS(),ns));
+    var sr=stage.getBoundingClientRect(), px=cx-sr.left-img.offsetLeft, py=cy-sr.top-img.offsetTop;
+    var lx=(px-Z.x)/Z.s, ly=(py-Z.y)/Z.s;
+    Z.x=px-lx*ns; Z.y=py-ly*ns; Z.s=ns; clampPan(); apply();
+  }
+  function centre(){ var r=stage.getBoundingClientRect(); return [r.left+r.width/2,r.top+r.height/2]; }
   function lbShow(n){
     at=(n+set.length)%set.length; var f=set[at], i=f.querySelector('img'); last=f;
-    img.src=i.src; img.alt=i.alt;
+    reset(); img.src=i.currentSrc||i.src; img.alt=i.alt;
     cap.textContent=(f.getAttribute('data-cap')||'')+'   ';
     if(set.length>1){ var c=document.createElement('span'); c.className='lb-count'; c.textContent=(at+1)+' / '+set.length; cap.appendChild(c); }
     img.style.animation='none'; void img.offsetWidth; img.style.animation='';
+    var z=f.getAttribute('data-zoom');
+    tip.textContent=fine?'Scroll to zoom, drag to move':'Pinch to zoom';
+    if(z){
+      tip.textContent='Loading full resolution';
+      var hi=new Image(); hi.onload=function(){ if(set[at]!==f||lb.hidden) return; img.src=z; tip.textContent=fine?'Scroll to zoom, drag to move':'Pinch to zoom'; }; hi.src=z;
+    }
   }
   function open(fig){
     if(!fig.querySelector('img')) return;
-    var scope=fig.closest('article, section.chapter, section')||document;
+    var scope=fig.closest('.chap, article, section.chapter, section')||document;
     set=Array.prototype.filter.call(scope.querySelectorAll('figure[data-cap]'),function(f){return f.offsetParent!==null;});
-    if(!set.length) set=[fig];
+    if(set.indexOf(fig)<0) set=[fig];
     lb.hidden=false; lbShow(set.indexOf(fig)); if(lenis) lenis.stop(); document.getElementById('lbClose').focus();
   }
-  function close(){ lb.hidden=true; img.src=''; if(lenis) lenis.start(); if(last&&last.focus) last.focus({preventScroll:true}); }
+  function close(){ lb.hidden=true; reset(); img.src=''; if(lenis) lenis.start(); if(last&&last.focus) last.focus({preventScroll:true}); }
   document.querySelectorAll('figure[data-cap]').forEach(function(f){ f.tabIndex=0; f.addEventListener('click',function(){open(f)}); f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open(f);} }); });
-  lb.addEventListener('click',function(e){ if(e.target!==img) close(); });
+  document.getElementById('lbClose').addEventListener('click',close);
+  document.getElementById('lbIn').addEventListener('click',function(){ var c=centre(); zoomAt(c[0],c[1],Z.s*1.6); });
+  document.getElementById('lbOut').addEventListener('click',function(){ var c=centre(); zoomAt(c[0],c[1],Z.s/1.6); });
+  document.getElementById('lbFit').addEventListener('click',reset);
   document.addEventListener('keydown',function(e){
     if(lb.hidden) return;
-    if(e.key==='Escape') close(); else if(e.key==='ArrowRight') lbShow(at+1); else if(e.key==='ArrowLeft') lbShow(at-1);
+    if(e.key==='Escape') close();
+    else if(e.key==='ArrowRight'&&Z.s===1) lbShow(at+1); else if(e.key==='ArrowLeft'&&Z.s===1) lbShow(at-1);
+    else if(e.key==='+'||e.key==='='){ var c=centre(); zoomAt(c[0],c[1],Z.s*1.4); } else if(e.key==='-'){ var c2=centre(); zoomAt(c2[0],c2[1],Z.s/1.4); }
   });
-  var tx=0,ty=0;
-  lb.addEventListener('touchstart',function(e){ tx=e.touches[0].clientX; ty=e.touches[0].clientY; },{passive:true});
-  lb.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
-    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) lbShow(at+(dx<0?1:-1));
-    else if(dy>80) close();
+  lb.addEventListener('wheel',function(e){ e.preventDefault(); if(lb.hidden) return; zoomAt(e.clientX,e.clientY,Z.s*Math.exp(-e.deltaY*(e.ctrlKey?.01:.0018))); },{passive:false});
+  /* pointers: one finger pans (or swipes when not zoomed), two fingers pinch */
+  var P={}, start=null, pinch=null, moved=false, lastTap=0;
+  function pts(){ return Object.keys(P).map(function(k){return P[k];}); }
+  lb.addEventListener('pointerdown',function(e){
+    if(e.target.closest('button')) return;
+    P[e.pointerId]={x:e.clientX,y:e.clientY}; moved=false;
+    var p=pts();
+    if(p.length===1){ start={x:e.clientX,y:e.clientY,zx:Z.x,zy:Z.y,t:Date.now(),onImg:e.target===img}; }
+    if(p.length===2){ var d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y); pinch={d:d,s:Z.s}; }
+    try{ lb.setPointerCapture(e.pointerId); }catch(_){}
+  });
+  lb.addEventListener('pointermove',function(e){
+    if(!P[e.pointerId]) return;
+    P[e.pointerId]={x:e.clientX,y:e.clientY}; var p=pts();
+    if(p.length===2&&pinch){ moved=true; var d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y); zoomAt((p[0].x+p[1].x)/2,(p[0].y+p[1].y)/2,pinch.s*d/pinch.d); return; }
+    if(p.length===1&&start){
+      var dx=e.clientX-start.x, dy=e.clientY-start.y; if(Math.abs(dx)+Math.abs(dy)>6) moved=true;
+      if(Z.s>1){ lb.classList.add('drag'); Z.x=start.zx+dx; Z.y=start.zy+dy; clampPan(); apply(); }
+    }
+  });
+  function up(e){
+    if(!P[e.pointerId]) return;
+    delete P[e.pointerId]; lb.classList.remove('drag');
+    var p=pts(); if(p.length<2) pinch=null;
+    if(p.length===1){ start={x:p[0].x,y:p[0].y,zx:Z.x,zy:Z.y,t:Date.now(),onImg:false}; return; }
+    if(!start) return;
+    var dx=e.clientX-start.x, dy=e.clientY-start.y, now=Date.now();
+    if(!moved){
+      if(start.onImg){
+        if(now-lastTap<320){ lastTap=0; if(Z.s>1) reset(); else zoomAt(e.clientX,e.clientY,Math.min(maxS(),2.6)); }
+        else lastTap=now;
+      } else if(Z.s===1) close();
+    } else if(Z.s===1&&e.pointerType!=='mouse'){
+      if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) lbShow(at+(dx<0?1:-1));
+      else if(dy>80) close();
+    } else if(Z.s===1&&e.pointerType==='mouse'&&Math.abs(dx)>80&&Math.abs(dx)>Math.abs(dy)) lbShow(at+(dx<0?1:-1));
+    start=null;
+  }
+  lb.addEventListener('pointerup',up); lb.addEventListener('pointercancel',up);
+  addEventListener('resize',function(){ if(!lb.hidden){ clampPan(); apply(); } });
+
+  /* ---------- floor plan switcher ---------- */
+  document.querySelectorAll('[data-levels]').forEach(function(L){
+    var tabs=L.querySelectorAll('.lv-tabs button'), figs=L.querySelectorAll('figure');
+    tabs.forEach(function(t,i){ t.addEventListener('click',function(){
+      tabs.forEach(function(o,j){ o.setAttribute('aria-selected',j===i?'true':'false'); });
+      figs.forEach(function(f,j){ f.hidden=j!==i; if(j===i){ f.classList.add('in'); var pi=f.querySelector('[data-rimg]'); if(pi) pi.classList.add('in'); } });
+      if(lenis) lenis.resize();
+    }); });
+  });
+
+  /* ---------- photo chapters: show all ---------- */
+  document.querySelectorAll('.more-btn').forEach(function(b){
+    b.addEventListener('click',function(){ var c=b.closest('.chapter'); c.classList.add('all'); c.querySelectorAll('figure.more').forEach(function(f){ f.classList.add('in'); }); if(lenis) lenis.resize(); if(window.__check) window.__check(); });
   });
 
   /* ---------- phone menu ---------- */
